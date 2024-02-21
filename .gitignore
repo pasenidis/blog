@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+.vercel
+=======
 # Logs
 logs
 *.log
@@ -128,3 +131,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+>>>>>>> 7587f0da11e45c5e840b8c26599a6d23346ecb9f
