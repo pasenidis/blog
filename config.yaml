@@ -22,7 +22,7 @@ module:
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: "Edward Pasenidis IT Blog"
-  description: "ExampleSite description"
+  description: "Personal technical blog."
   keywords: [Blog, Portfolio, Cybersecurity, Crypto, Software]
   author: "Edward Pasenidis"
   # author: ["Me", "You"] # multiple authors
