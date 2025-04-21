@@ -1,12 +1,9 @@
----
-author: ["Edward Pasenidis"]
-title: "B01lersCTF - Trouble at the SPA (Web)"
-date: "2025-04-21"
-description: "Fix your routes!"
-tags: ["b01lersctf", "writeup", "ctf"]
-categories: ["Writeups"]
-ShowToc: false
----
++++
+date = '2025-04-21T23:11:27+03:00'
+draft = true
+title = 'B01lersCTF - Trouble at the SPA (Web)'
++++
+
 
 ## Overview
 

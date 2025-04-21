@@ -1,12 +1,8 @@
----
-author: ["Edward Pasenidis"]
-title: "B01lersCTF - When (Web)"
-date: "2025-04-21"
-description: "Simple & fast SHA-256 brute-forcing"
-tags: ["b01lersctf", "writeup", "ctf"]
-categories: ["Writeups"]
-ShowToc: false
----
++++
+date = '2025-04-21T23:11:00+03:00'
+draft = true
+title = 'B01lersCTF - When (Web)'
++++
 
 ## Overview
 

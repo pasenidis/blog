@@ -1,14 +1,9 @@
----
-author: ["Edward Pasenidis"]
-title: "Digitalization of a logistics-oriented SME"
-date: "2024-02-21"
-description: "An analyst's tale of implementing operations digital infrastructure for a European logistics company."
-tags: ["technology", "enterprise", "logistics", "infrastructure", "software"]
-categories: ["Solutions", "Projects"]
-ShowToc: true
-cover:
-    image: "images/sphera.png" # image path/url
-    hiddenInList: false
++++
+date = '2024-02-20T22:50:03+03:00'
+draft = true
+title = 'Digitalization of a logistics-oriented SME'
++++
+
 ---
 
 Nowadays, no business with huge volumes of data survives without tailor-made

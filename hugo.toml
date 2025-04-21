@@ -1,0 +1,4 @@
+baseURL = 'https://blog.pasenidis.com/'
+languageCode = 'en-us'
+title = 'Edward Pasenidis'
+theme = 'hugo-blog-awesome'
