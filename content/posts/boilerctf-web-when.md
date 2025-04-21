@@ -70,6 +70,10 @@ function gamble(number) {
 }
 
 function findFF() {
+    /*
+    we're looping over increasing unix timestamps in seconds, starting from 0 Jan 1970 up to 1e8 (some years later)
+    for each timestamp: we convert it to a string; hash it; check if first two bytes are equal to 255 (0xff in hex)
+    */
     for (let i = 0; i < 1e8; i++) {
         const hash = gamble(i);
         if (hash[0] === 0xff && hash[1] === 0xff) {
@@ -146,5 +150,5 @@ First two bytes: 255 255
 bctf{}
 ```
 
-## Epilogue
-Thanks for reading! Hope you had fun with this challenge.
+## Conclusion
+This was a neat little challenge where the actual vulnerability wasn't in the logic itself but in the assumption that it wouldn't be feasible to find a timestamp that triggers the condition. A little brute-force let us beat the odds and win the gamble. Hope you had fun!
