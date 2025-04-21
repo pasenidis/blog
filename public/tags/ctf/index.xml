@@ -9,6 +9,13 @@
     <lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.pasenidis.com/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>B01lersCTF - Trouble at the SPA (Web)</title>
+      <link>https://blog.pasenidis.com/posts/boilerctf-web-trouble-at-the-spa/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://blog.pasenidis.com/posts/boilerctf-web-trouble-at-the-spa/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;This whitebox challenge is running on a Vite/React server as a SPA (as the title of challenge suggests).&lt;/p&gt;&#xA;&lt;h2 id=&#34;reviewing-the-code&#34;&gt;Reviewing the code&lt;/h2&gt;&#xA;&lt;p&gt;After taking a look at the code, we notice that the flag is located inside a JSX/TSX component called &lt;code&gt;Flag()&lt;/code&gt; but it&amp;rsquo;s not directly exposed on the GitHub Pages instance, this is a common misconfiguration mistake. It happens because web servers like Apache and Nginx don&amp;rsquo;t handle routing the way React Router does (you can read more &lt;a href=&#34;https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually/57066837#57066837&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>B01lersCTF - When (Web)</title>
       <link>https://blog.pasenidis.com/posts/boilerctf-web-when/</link>
       <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>

@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Infrastructure on Edward Pasenidis&#39; Personal Blog</title>
     <link>https://blog.pasenidis.com/tags/infrastructure/</link>
     <description>Recent content in Infrastructure on Edward Pasenidis&#39; Personal Blog</description>
-    <image>
-      <title>Edward Pasenidis&#39; Personal Blog</title>
-      <url>https://blog.pasenidis.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://blog.pasenidis.com/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 21 Feb 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://blog.pasenidis.com/tags/infrastructure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Digitalization of a logistics-oriented SME</title>
-      <link>https://blog.pasenidis.com/posts/infrastructure-sphera/</link>
+      <link>https://blog.pasenidis.com/posts/digitalization-sphera/</link>
       <pubDate>Wed, 21 Feb 2024 00:00:00 +0000</pubDate>
-      <guid>https://blog.pasenidis.com/posts/infrastructure-sphera/</guid>
-      <description>An analyst&amp;#39;s tale of implementing operations digital infrastructure for a European logistics company.</description>
+      <guid>https://blog.pasenidis.com/posts/digitalization-sphera/</guid>
+      <description>&lt;p&gt;Nowadays, no business with huge volumes of data survives without tailor-made&#xA;software that suits the niche it operates in. With this in mind, a customer&#xA;approached me and asked to digitize their operations. This article dives into&#xA;the process of developing a whole new IT suite for a European parcel shipping&#xA;company that is based in Greece.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

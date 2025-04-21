@@ -1,12 +1,11 @@
 baseURL: "https://blog.pasenidis.com/"
 title: "Edward Pasenidis' Personal Blog"
-paginate: 5
 theme: PaperMod
 
 enableRobotsTXT: true
 buildDrafts: false
-buildFuture: false
-buildExpired: false
+buildFuture: true
+buildExpired: true
 
 googleAnalytics: UA-123-45
 
@@ -142,3 +141,6 @@ markup:
     # guessSyntax: true
     # lineNos: true
     # style: monokai
+
+pagination:
+  pagerSize: 5
