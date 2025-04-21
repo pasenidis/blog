@@ -2,8 +2,8 @@
 author: ["Edward Pasenidis"]
 title: "B01lersCTF - Trouble at the SPA (Web)"
 date: "2025-04-21"
-description: "Simple & fast SHA-256 brute-forcing"
-tags: ["technology", "enterprise", "logistics", "infrastructure", "software"]
+description: "Fix your routes!"
+tags: ["b01lersctf", "writeup", "ctf"]
 categories: ["Writeups"]
 ShowToc: false
 ---
