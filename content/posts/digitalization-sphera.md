@@ -1,6 +1,6 @@
 +++
 date = '2024-02-20T22:50:03+03:00'
-draft = true
+draft = false
 title = 'Digitalization of a logistics-oriented SME'
 +++
 

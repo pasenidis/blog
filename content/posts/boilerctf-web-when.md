@@ -1,6 +1,6 @@
 +++
 date = '2025-04-21T23:11:00+03:00'
-draft = true
+draft = false
 title = 'B01lersCTF - When (Web)'
 +++
 
