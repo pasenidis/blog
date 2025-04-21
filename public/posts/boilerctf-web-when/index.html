@@ -53,7 +53,7 @@
         },
         "datePublished": "2025-04-21",
         "description": "",
-        "wordCount":  564 ,
+        "wordCount":  646 ,
         "mainEntityOfPage": "True",
         "dateModified": "2025-04-21",
         "image": {
@@ -229,6 +229,10 @@ There is a <code>gamble(number)</code> function that returns a SHA-256, it is us
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findFF</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    we&#39;re looping over increasing unix timestamps in seconds, starting from 0 Jan 1970 up to 1e8 (some years later)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    for each timestamp: we convert it to a string; hash it; check if first two bytes are equal to 255 (0xff in hex)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1e8</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">i</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">0xff</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">0xff</span>) {
@@ -300,8 +304,8 @@ First two bytes: 255 255
 │ 31      │ 155    │
 └─────────┴────────┘
 bctf{}
-</code></pre><h2 id="epilogue">Epilogue</h2>
-<p>Thanks for reading! Hope you had fun with this challenge.</p>
+</code></pre><h2 id="conclusion">Conclusion</h2>
+<p>This was a neat little challenge where the actual vulnerability wasn&rsquo;t in the logic itself but in the assumption that it wouldn&rsquo;t be feasible to find a timestamp that triggers the condition. A little brute-force let us beat the odds and win the gamble. Hope you had fun!</p>
 
             </div>
         </article></main>
