@@ -12,4 +12,12 @@ name = "twitter"
 url = "https://twitter.com/0x3dward"
 
 [params]
+sitename="Edward's Blog"
+description="Writeups, projects and stuff"
+mainSections=['posts']
 goToTop = true
+
+[params.author]
+name = "Edward Pasenidis"
+intro = "Welcome to my blog!"
+description = "I write about security, CTFs and software engineering."
