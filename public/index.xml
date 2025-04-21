@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Edward Pasenidis</title>
+    <link>https://blog.pasenidis.com/</link>
+    <description>Recent content on Edward Pasenidis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Apr 2025 23:11:27 +0300</lastBuildDate><atom:link href="https://blog.pasenidis.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>B01lersCTF - Trouble at the SPA (Web)</title>
+      <link>https://blog.pasenidis.com/posts/boilerctf-web-trouble-at-the-spa/</link>
+      <pubDate>Mon, 21 Apr 2025 23:11:27 +0300</pubDate>
+      
+      <guid>https://blog.pasenidis.com/posts/boilerctf-web-trouble-at-the-spa/</guid>
+      
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This whitebox challenge is running on a Vite/React server as a SPA (as the title of challenge suggests).&lt;/p&gt;
+&lt;h2 id=&#34;reviewing-the-code&#34;&gt;Reviewing the code&lt;/h2&gt;
+&lt;p&gt;After taking a look at the code, we notice that the flag is located inside a JSX/TSX component called &lt;code&gt;Flag()&lt;/code&gt; but it&amp;rsquo;s not directly exposed on the GitHub Pages instance, this is a common misconfiguration mistake. It happens because web servers like Apache and Nginx don&amp;rsquo;t handle routing the way React Router does (you can read more &lt;a href=&#34;https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually/57066837#57066837&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>B01lersCTF - When (Web)</title>
+      <link>https://blog.pasenidis.com/posts/boilerctf-web-when/</link>
+      <pubDate>Mon, 21 Apr 2025 23:11:00 +0300</pubDate>
+      
+      <guid>https://blog.pasenidis.com/posts/boilerctf-web-when/</guid>
+      
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The challenge is a small Express app in which a user can hit anywhere on the page to &amp;ldquo;gamble&amp;rdquo;.&lt;/p&gt;
+&lt;h2 id=&#34;reviewing-the-code&#34;&gt;Reviewing the code&lt;/h2&gt;
+&lt;p&gt;After reading &lt;code&gt;app.ts&lt;/code&gt;, we can see that there is a rate-limiter in place so directly bruteforcing via HTTP is obviously impossible.
+There is a &lt;code&gt;gamble(number)&lt;/code&gt; function that returns a SHA-256, it is used to issue hashes from JavaScript dates.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;async&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;gamble&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;crypto&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;subtle&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;digest&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SHA-256&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#a6e22e&#34;&gt;Buffer&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;from&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;number&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;toString&lt;/span&gt;()))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Here comes the interesting part, the Express app serves a POST endpoint &lt;code&gt;/gamble&lt;/code&gt;, which can optionally use a &lt;code&gt;Date&lt;/code&gt; HTTP header to perform the &amp;ldquo;calculation&amp;rdquo;.&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Digitalization of a logistics-oriented SME</title>
+      <link>https://blog.pasenidis.com/posts/digitalization-sphera/</link>
+      <pubDate>Tue, 20 Feb 2024 22:50:03 +0300</pubDate>
+      
+      <guid>https://blog.pasenidis.com/posts/digitalization-sphera/</guid>
+      
+      <description>&lt;hr&gt;
+&lt;p&gt;Nowadays, no business with huge volumes of data survives without tailor-made
+software that suits the niche it operates in. With this in mind, a customer
+approached me and asked to digitize their operations. This article dives into
+the process of developing a whole new IT suite for a European parcel shipping
+company that is based in Greece.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

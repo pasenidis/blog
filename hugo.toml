@@ -2,3 +2,14 @@ baseURL = 'https://blog.pasenidis.com/'
 languageCode = 'en-us'
 title = 'Edward Pasenidis'
 theme = 'hugo-blog-awesome'
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/pasenidis"
+
+[[params.socialIcons]]
+name = "twitter"
+url = "https://twitter.com/0x3dward"
+
+[params]
+goToTop = true

