@@ -4,7 +4,8 @@
     <title>Categories on Edward Pasenidis</title>
     <link>https://blog.pasenidis.com/categories/</link>
     <description>Recent content in Categories on Edward Pasenidis</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://blog.pasenidis.com/categories/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://blog.pasenidis.com/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
