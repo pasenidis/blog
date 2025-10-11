@@ -2,23 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://blog.pasenidis.com/</loc>
-    <lastmod>2025-11-10T12:11:27+03:00</lastmod>
+    <loc>http://localhost:1313/posts/ecsc-2025/</loc>
+    <lastmod>2025-10-10T17:22:02+03:00</lastmod>
   </url><url>
-    <loc>https://blog.pasenidis.com/posts/</loc>
-    <lastmod>2025-11-10T12:11:27+03:00</lastmod>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-10-10T17:22:02+03:00</lastmod>
   </url><url>
-    <loc>https://blog.pasenidis.com/posts/boilerctf-web-trouble-at-the-spa/</loc>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-10-10T17:22:02+03:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/boilerctf-web-trouble-at-the-spa/</loc>
     <lastmod>2025-04-21T23:11:27+03:00</lastmod>
   </url><url>
-    <loc>https://blog.pasenidis.com/posts/boilerctf-web-when/</loc>
+    <loc>http://localhost:1313/posts/boilerctf-web-when/</loc>
     <lastmod>2025-04-21T23:11:00+03:00</lastmod>
   </url><url>
-    <loc>https://blog.pasenidis.com/posts/digitalization-sphera/</loc>
+    <loc>http://localhost:1313/posts/digitalization-sphera/</loc>
     <lastmod>2024-02-20T22:50:03+03:00</lastmod>
   </url><url>
-    <loc>https://blog.pasenidis.com/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
   </url><url>
-    <loc>https://blog.pasenidis.com/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>
